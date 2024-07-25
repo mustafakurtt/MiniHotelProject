@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.EntityConfigurations;
+namespace DataAccess.Concrete.EntityConfigurations;
 
 public class RoomTypeConfiguration : IEntityTypeConfiguration<RoomType>
 {
@@ -13,6 +13,7 @@ public class RoomTypeConfiguration : IEntityTypeConfiguration<RoomType>
         builder.Property(rt => rt.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(rt => rt.DeletedDate).HasColumnName("DeletedDate");
         builder.Property(rt => rt.Description).HasColumnName("DeletedDate").IsRequired();
+        builder.Property(rt => rt.Name).HasColumnName("Name").IsRequired();
         builder.Property(rt => rt.MaxGuestCount).HasColumnName("MaxGuestCount").IsRequired();
         builder.Property(rt => rt.ImageUrl).HasColumnName("ImageUrl");
 

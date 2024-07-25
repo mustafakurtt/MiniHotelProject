@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.EntityConfigurations;
+namespace DataAccess.Concrete.EntityConfigurations;
 
 public class RoomConfiguration : IEntityTypeConfiguration<Room>
 {

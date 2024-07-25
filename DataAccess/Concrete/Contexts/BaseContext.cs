@@ -1,7 +1,7 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
-using DataAccess.EntityConfigurations;
+using DataAccess.Concrete.EntityConfigurations;
 
 namespace DataAccess.Concrete.Contexts;
 
