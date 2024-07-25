@@ -8,4 +8,6 @@ public class Room : Entity<Guid>
     public Guid RoomTypeId { get; set; }
     public string RoomNumber { get; set; }
     public RoomStatus RoomStatus { get; set; }
+
+    public virtual RoomType RoomType { get; set; }
 }

@@ -1,4 +1,7 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
+using DataAccess.Abstract;
 using DataAccess.Concrete;
 using Entities.Concrete;
 
@@ -6,35 +9,49 @@ namespace Business.Concrete;
 
 public class RoomTypeManager : IRoomTypeService
 {
-    private RoomTypeDal _roomTypeDal;
+    private readonly IRoomTypeDal _roomTypeDal;
 
-    public RoomTypeManager(RoomTypeDal roomTypeDal)
+    public RoomTypeManager(IRoomTypeDal roomTypeDal)
     {
         _roomTypeDal = roomTypeDal;
     }
 
-    public async Task<List<RoomType>> GetAll()
+    public async Task<IDataResult<List<RoomType>>> GetAllAsync()
     {
-        return await _roomTypeDal.GetListAsync();
+        var roomTypeList = await _roomTypeDal.GetListAsync();
+        return new SuccessDataResult<List<RoomType>>(roomTypeList);
     }
 
-    public async Task<RoomType?> GetById(Guid id)
+    public async Task<IDataResult<RoomType>> GetByIdAsync(Guid id)
     {
-        return await _roomTypeDal.GetAsync(r => r.Id == id);
+        var roomType = await _roomTypeDal.GetAsync(r => r.Id == id);
+        if (roomType != null)
+            return new SuccessDataResult<RoomType>(roomType);
+        return new ErrorDataResult<RoomType>(RoomTypeMessages.RoomTypeNotExists);
+
     }
 
-    public async Task<RoomType> Add(RoomType roomType)
+    public async Task<IResult> AddAsync(RoomType roomType)
     {
-        return await _roomTypeDal.AddAsync(roomType);
+        var _roomType = await _roomTypeDal.AddAsync(roomType);
+        if (_roomType != null)
+            return new SuccessResult(RoomTypeMessages.RoomTypeAdded);
+        return new ErrorDataResult<RoomType>(RoomTypeMessages.RoomTypeNotExists);
     }
 
-    public async Task<RoomType> Update(RoomType roomType)
+    public async Task<IResult> UpdateAsync(RoomType roomType)
     {
-       return await _roomTypeDal.UpdateAsync(roomType);
+       var _roomType = await _roomTypeDal.UpdateAsync(roomType);
+       if (roomType != null)
+           return new SuccessResult(RoomTypeMessages.RoomTypeUpdated);
+       return new ErrorResult(RoomTypeMessages.RoomTypeNotExists);
     }
 
-    public async Task<RoomType> Delete(RoomType roomType)
+    public async Task<IResult> DeleteAsync(RoomType roomType)
     {
-        return await _roomTypeDal.DeleteAsync(roomType);
+        var _roomType = await _roomTypeDal.DeleteAsync(roomType);
+        if (roomType != null)
+            return new SuccessResult(RoomTypeMessages.RoomTypeDeleted);
+        return new ErrorResult(RoomTypeMessages.RoomTypeNotExists);
     }
 }
