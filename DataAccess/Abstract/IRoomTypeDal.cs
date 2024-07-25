@@ -1,13 +1,8 @@
-﻿using Entities.Concrete;
+﻿using Core.DataAccess;
+using Entities.Concrete;
 
 namespace DataAccess.Abstract;
 
-public interface IRoomTypeDal
+public interface IRoomTypeDal : IAsyncRepository<RoomType,Guid>
 {
-    List<RoomType> GetAll();
-    RoomType GetById(Guid id);
-    void Add(RoomType roomType);
-    void Delete (RoomType roomType);
-    void Update (RoomType roomType);
-
 }

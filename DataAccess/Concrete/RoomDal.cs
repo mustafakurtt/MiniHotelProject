@@ -5,9 +5,9 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete;
 
-public class RoomTypeDal : EntityRepositoryBase<RoomType,Guid,BaseContext> , IRoomTypeDal
+public class RoomDal : EntityRepositoryBase<Room,Guid,BaseContext> , IRoomDal
 {
-    public RoomTypeDal(BaseContext context) : base(context)
+    public RoomDal(BaseContext context) : base(context)
     {
     }
 }

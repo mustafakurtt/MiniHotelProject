@@ -1,6 +1,8 @@
-﻿namespace DataAccess.Abstract;
+﻿using Core.DataAccess;
+using Entities.Concrete;
 
-public interface IRoomDal
+namespace DataAccess.Abstract;
+
+public interface IRoomDal : IAsyncRepository<Room,Guid>
 {
-    
 }
