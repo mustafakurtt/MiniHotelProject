@@ -13,28 +13,28 @@ public class RoomTypeManager : IRoomTypeService
         _roomTypeDal = roomTypeDal;
     }
 
-    public List<RoomType> GetAll()
+    public async Task<List<RoomType>> GetAll()
     {
-        return _roomTypeDal.GetAll();
+        return await _roomTypeDal.GetListAsync();
     }
 
-    public RoomType GetById(Guid id)
+    public async Task<RoomType?> GetById(Guid id)
     {
-        return _roomTypeDal.GetById(id);
+        return await _roomTypeDal.GetAsync(r => r.Id == id);
     }
 
-    public void Add(RoomType roomType)
+    public async Task<RoomType> Add(RoomType roomType)
     {
-        _roomTypeDal.Add(roomType);
+        return await _roomTypeDal.AddAsync(roomType);
     }
 
-    public void Update(RoomType roomType)
+    public async Task<RoomType> Update(RoomType roomType)
     {
-        _roomTypeDal.Update(roomType);
+       return await _roomTypeDal.UpdateAsync(roomType);
     }
 
-    public void Delete(RoomType roomType)
+    public async Task<RoomType> Delete(RoomType roomType)
     {
-        _roomTypeDal.Delete(roomType);
+        return await _roomTypeDal.DeleteAsync(roomType);
     }
 }

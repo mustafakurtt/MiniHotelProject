@@ -4,9 +4,9 @@ namespace Business.Abstract;
 
 public interface IRoomTypeService
 {
-    List<RoomType> GetAll();
-    RoomType GetById(Guid id);
-    void Add(RoomType roomType);
-    void Update(RoomType roomType);
-    void Delete(RoomType roomType);
+    Task<List<RoomType>> GetAll();
+    Task<RoomType?> GetById(Guid id);
+    Task<RoomType> Add(RoomType roomType);
+    Task<RoomType> Update(RoomType roomType);
+    Task<RoomType> Delete(RoomType roomType);
 }
