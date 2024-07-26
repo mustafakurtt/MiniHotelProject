@@ -1,6 +1,9 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Castle.DynamicProxy;
+using Core.Utilities.Interceptors;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
 using DataAccess.Concrete.Contexts;
@@ -19,6 +22,12 @@ public class AutofacBusinessModule : Module
 
         builder.RegisterType<RoomManager>().As<IRoomService>().SingleInstance();
         builder.RegisterType<RoomTypeManager>().As<IRoomTypeService>().SingleInstance();
-        base.Load(builder);
+
+        var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+        builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+            .EnableInterfaceInterceptors(new ProxyGenerationOptions()
+            {
+                Selector = new AspectInterceptorSelector()
+            }).SingleInstance();
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
@@ -30,7 +32,7 @@ public class RoomTypeManager : IRoomTypeService
         return new ErrorDataResult<RoomType>(RoomTypeMessages.RoomTypeNotExists);
 
     }
-
+    [ValidationAspect(typeof(RoomTypeValidator))]
     public async Task<IResult> AddAsync(RoomType roomType)
     {
         var _roomType = await _roomTypeDal.AddAsync(roomType);
