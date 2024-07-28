@@ -12,12 +12,12 @@ public class RoomConfiguration : IEntityTypeConfiguration<Room>
         builder.Property(r => r.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(r => r.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(r => r.DeletedDate).HasColumnName("DeletedDate");
-
         builder.Property(r => r.RoomNumber).HasColumnName("RoomNumber").IsRequired();
         builder.Property(r => r.RoomStatus).HasColumnName("RoomStatus").IsRequired();
+        builder.Property(r => r.RoomTypeId).HasColumnName("RoomTypeId").IsRequired();
 
-        builder.HasOne(r => r.RoomType);
-        builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
-
+        builder.HasOne(r => r.RoomType).WithMany(rt => rt.Rooms).HasForeignKey(r => r.RoomTypeId);
+        builder.HasMany(r => r.Reservations).WithOne(res => res.Room).HasForeignKey(res => res.RoomId);
+        builder.HasQueryFilter(r => !r.DeletedDate.HasValue);
     }
 }

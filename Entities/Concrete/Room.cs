@@ -10,4 +10,10 @@ public class Room : Entity<Guid>
     public RoomStatus RoomStatus { get; set; }
 
     public virtual RoomType RoomType { get; set; }
+    public virtual ICollection<Reservation> Reservations { get; set; }
+
+    public Room()
+    {
+        Reservations = new HashSet<Reservation>();
+    }
 }

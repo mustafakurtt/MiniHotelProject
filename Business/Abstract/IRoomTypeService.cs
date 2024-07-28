@@ -1,14 +1,15 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs.RoomTypeDTOs;
 
 namespace Business.Abstract;
 
 public interface IRoomTypeService
 {
-    Task<IDataResult<List<RoomType>>> GetAllAsync();
-    Task<IDataResult<RoomType>> GetByIdAsync(Guid id);
-    Task<IResult> AddAsync(RoomType roomType);
-    Task<IResult> UpdateAsync(RoomType roomType);
-    Task<IResult> DeleteAsync(RoomType roomType);
-    
+    Task<IDataResult<List<RoomTypeResponseDto>>> GetAllAsync();
+    Task<IDataResult<RoomTypeResponseDto>> GetByIdAsync(Guid id);
+    Task<IResult> AddAsync(RoomTypeAddRequestDto roomTypeAddRequestDto);
+    Task<IResult> UpdateAsync(RoomTypeUpdateRequestDto roomTypeUpdateRequestDto);
+    Task<IResult> DeleteAsync(Guid id);
+    Task<IResult> AnyAsync(Guid id);
 }

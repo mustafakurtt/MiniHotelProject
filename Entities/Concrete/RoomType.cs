@@ -11,4 +11,9 @@ public class RoomType : Entity<Guid>
     public string ImageUrl { get; set; }
     [JsonIgnore]
     public virtual ICollection<Room> Rooms { get; set; }
+
+    public RoomType()
+    {
+        Rooms = new HashSet<Room>();
+    }
 }
